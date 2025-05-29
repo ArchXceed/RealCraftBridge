@@ -1,12 +1,13 @@
 plugins {
     id 'java'
     id("xyz.jpenilla.run-paper") version "2.3.1"
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'org.loinesgaming'
 version = '1.0-SNAPSHOT'
 
-repositories {
+    repositories {
     mavenCentral()
     maven {
         name = "papermc-repo"
@@ -20,6 +21,16 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.5-R0.1-SNAPSHOT")
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+    implementation("com.googlecode.json-simple:json-simple:1.1.1")
+    implementation 'io.github.cdimascio:dotenv-java:3.0.0'
+}
+
+shadowJar {
+    archiveBaseName.set('RealCraftBridge')
+    archiveVersion.set('1.0-SNAPSHOT')
+    archiveClassifier.set('')
+    mergeServiceFiles()
 }
 
 tasks {
@@ -29,7 +40,11 @@ tasks {
         // Your plugin's jar (or shadowJar if present) will be used automatically.
         minecraftVersion("1.21")
     }
+    build {
+        dependsOn(shadowJar)
+    }
 }
+
 
 def targetJavaVersion = 21
 java {
