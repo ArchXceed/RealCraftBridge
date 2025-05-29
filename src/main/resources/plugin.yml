@@ -1,0 +1,7 @@
+name: RealCraftBridge
+version: '1.0-SNAPSHOT'
+main: org.loinesgaming.realCraftBridge.RealCraftBridge
+api-version: '1.21'
+authors: [ Lyam Zambaz ]
+description: A Bridge between a discord bot and mc
+website: https://loines.ch
